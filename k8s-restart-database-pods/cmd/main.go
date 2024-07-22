@@ -15,5 +15,5 @@ func main() {
 	if err := k8s.RestartDatabaseDeployments(clientset); err != nil {
 		log.Fatalf("Failed to restart deployments: %v", err)
 	}
-	log.Println("Successfully restarted deployments.")
+	log.Println("Command successfully executed.")
 }
