@@ -12,7 +12,7 @@ import (
 )
 
 // RestartDatabaseDeployments restarts all deployments with "database" in their pod names.
-func RestartDatabaseDeployments(clientset *kubernetes.Clientset) error {
+func RestartDatabaseDeployments(clientset kubernetes.Interface) error {
 	// List all pods with the word "database" in their name
 	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
@@ -53,7 +53,7 @@ func RestartDatabaseDeployments(clientset *kubernetes.Clientset) error {
 	return nil
 }
 
-func rolloutRestartDeployment(clientset *kubernetes.Clientset, namespace, name string) error {
+func rolloutRestartDeployment(clientset kubernetes.Interface, namespace, name string) error {
 	// Get the deployment
 	deployment, err := clientset.AppsV1().Deployments(namespace).Get(context.TODO(), name, metav1.GetOptions{})
 	if err != nil {
